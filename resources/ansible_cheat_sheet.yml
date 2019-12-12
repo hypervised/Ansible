@@ -1,0 +1,26 @@
+--- #declares a new document within the yaml file
+- hosts: webservers #hosts declaration defines which group the playbook runs against
+  tasks: # defines a list of tasks
+  - name: Install a http pkg # name describes the task
+    yum: name=httpd state=latest #uses yum to install httpd and the state defines the version, present indicates any version can be installed, latest will grab the latest version, absent will uninstall the pkg
+  - name: Start httpd service
+    service: name=httpd state=restarted  #uses the service module to restart the httpd service
+	notify: #calls a handler, the notify statement must match the handler name
+	- restart apache
+	name: ensure apache is running and enabled at boot
+	service: name=httpd state=started enabled=yes
+  handlers: #handlers are like tasks but are only called with a notify after a change happens on the client.  ex. you dont need to restart apache if it failed to install
+    - name: restart apache
+	  service: name=httpd state=restarted
+	
+	
+	
+ansible-playbook install.yml --syntax-check # runs a linter
+ansible-doc -l | more # gives you a list of all the modules
+ansible-doc -yum # gives you the man page for the module
+ansible-playbook install.yml --list-hosts # lists the hosts the playbook will run against
+
+
+Good Learning Resources
+
+https://www.youtube.com/watch?v=4sNdq6fjZFQ

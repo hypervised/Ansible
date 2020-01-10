@@ -1,0 +1,7 @@
+[acme_aws]
+ip
+dns name
+
+[acme_aws:vars]
+ansible_ssh_private_key_file=/path/to/pem/file
+ansible_user=

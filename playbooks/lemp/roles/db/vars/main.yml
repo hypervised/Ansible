@@ -1,8 +1,0 @@
----
-# vars file for db
-
-db_name: demodb
-
-db_user: dbuser
-
-db_pass: '*F1422CE0AFC3AE93958D1F4BE1CA1FAB09E439AC'

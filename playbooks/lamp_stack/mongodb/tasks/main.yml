@@ -1,0 +1,16 @@
+  - name: Install Utility Software
+    become: yes
+    apt: name={{item}} state=latest update_cache=yes
+
+    with_items:
+
+      - software-properties-common
+
+  - name: Import Key
+    apt_key:  keyserver=hkp://keyserver.ubuntu.com:80 id=4B7C549A058F8B6B state=present
+
+  - name: Add Repo
+    apt_repository: repo='deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse'
+
+  - name: Install Mongo
+    apt: pkg=mongodb-org state=latest update_cache=yes  
